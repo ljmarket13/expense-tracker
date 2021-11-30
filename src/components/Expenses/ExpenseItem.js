@@ -5,12 +5,20 @@ import ExpenseDate from "../Expenses/ExpenseDate";
 
 const ExpenseItem = (props) => {
 
-	// const [title, setTitle] = useState(props.title);
+	const [title, setTitle] = useState(props.title);
+	const [items, setItems] = useState([]);
 
-	// const clickHandler = () => {
-	// 	setTitle('updated');
-	// 	console.log(title);
-	// };	
+	const clickHandler = () => {
+		setTitle('updated');
+		// props.onDelete(props.id)
+	};	
+	const deleteItem = id => {
+		setItems(prevItems => {
+			return prevItems.filter(index => {
+				return index !== id;
+			});
+		});
+	}
 
   return (
     <Card className="expense-item">
@@ -19,7 +27,7 @@ const ExpenseItem = (props) => {
         <h2>{props.title}</h2>
         <div className="expense-item__price">${props.amount}</div>
       </div>
-			{/* <button onClick={clickHandler}>Change Title</button> */}
+			<button onClick={deleteItem}>Delete</button>
     </Card>
   );
 };
